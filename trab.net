@@ -1,0 +1,36 @@
+* C:\Users\lucca\Desktop\Prog\Projeto Circ2\trab.ASC
+V1 noise 0 wavefile="white_noise.wav"
+R1 noise 0 50k
+V3 audio 0 wavefile="musica_01.wav"
+R2 audio 0 50k
+R3 exemplo1 0 1k
+R4 output exemplo1 1k
+XU1 mid 0 DC50FA8
+XU2 tweeter 0 DC28F4
+XU3 subwoofer 0 IB3858
+XU4 0 N002 noise_inv +5 -5 LT1818
+V2 +5 0 5
+V4 0 -5 5
+R5 N002 noise 50k
+R6 noise_inv N002 10k
+XU5 0 N003 output_inv +5 -5 LT1818
+R7 N003 noise_inv 10K
+R8 output_inv N003 10K
+R9 N003 audio 10K
+R10 exemplo2 0 1k
+R11 audio exemplo2 1k
+XU6 0 N001 output +5 -5 LT1818
+R12 N001 output_inv 50k
+R13 output N001 50k
+.tran 0 2 0
+.wave "output_test.wav" 16 44.1k V(exemplo1)
+* Entradas do circuito:\n- noise (ruído)\n- audio (som com ruído)
+* Diretiva de simulação
+* Caixas de som:\n- Tweeter (agudos) - Dayton Audio DC28F-4\n- Mid-range (médios) - Dayton Audio DC50FA-8\n- Subwoofer (graves) - Dayton Audio IB385-8
+* Saida do circuito:\nAudio em formato .wav
+.lib "Loudspeaker.lib"
+.wave "output_test2.wav" 16 44.1k V(exemplo2)
+* Saida do circuito:\nAudio em formato .wav
+.lib LTC2.LIB
+.backanno
+.end
