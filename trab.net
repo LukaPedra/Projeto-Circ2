@@ -8,18 +8,45 @@ R4 output exemplo 1k
 XU1 mid 0 DC50FA8
 XU2 tweeter 0 DC28F4
 XU3 subwoofer 0 IB3858
-XU4 0 N002 noise_inv +5 -5 LT1818
+XU4 0 N004 noise_inv +5 -5 LT1818
 V2 +5 0 5
 V4 0 -5 5
-R5 N002 noise 50k
-R6 noise_inv N002 10k
-XU5 0 N003 output_inv +5 -5 LT1818
-R7 N003 noise_inv 10K
-R8 output_inv N003 10K
-R9 N003 audio 10K
-XU6 0 N001 output +5 -5 LT1818
-R12 N001 output_inv 50k
-R13 output N001 50k
+R5 N004 noise 50k
+R6 noise_inv N004 10k
+XU5 0 N005 output_inv +5 -5 LT1818
+R7 N005 noise_inv 10K
+R8 output_inv N005 10K
+R9 N005 audio 10K
+XU6 0 N003 output +5 -5 LT1818
+R12 N003 output_inv 50k
+R13 output N003 50k
+C2 output N009 10n
+R10 N009 0 8k
+R11 N013 N012 1k
+C1 N006 N013 10n
+XU7 0 N006 N007 +5 -5 LT1818
+R14 N007 N006 2k
+C3 N007 N006 10n
+XU8 0 N008 outFaixa +5 -5 LT1818
+R15 N008 N014 50k
+R16 outFaixa N008 50k
+XU9 N007 N014 N014 +5 -5 LT1818
+L1 N011 N010 2.54
+R17 N011 0 8k
+XU10 N011 outBaixa outBaixa +5 -5 LT1818
+XU11 N009 outAlta outAlta +5 -5 LT1818
+R18 exemplo2 0 1k
+R19 N001 exemplo2 1k
+R20 exemplo1 0 1k
+R21 outBaixa exemplo1 1k
+R22 exemplo3 0 1k
+R23 N002 exemplo3 1k
+C4 output N015 40µ
+R24 N015 0 8
+XU12 N015 corte1 corte1 +5 -5 LT1818
+L2 N016 corte1 8m
+R25 N016 0 100
+XU13 N016 corte2 corte2 +5 -5 LT1818
 .tran 0 2 0
 .wave "output_test.wav" 16 44.1k V(exemplo)
 * Entradas do circuito:\n- noise (ruído)\n- audio (som com ruído)
@@ -27,6 +54,20 @@ R13 output N001 50k
 * Caixas de som:\n- Tweeter (agudos) - Dayton Audio DC28F-4\n- Mid-range (médios) - Dayton Audio DC50FA-8\n- Subwoofer (graves) - Dayton Audio IB385-8
 * Saida do circuito:\nAudio em formato .wav
 .lib "Loudspeaker.lib"
+* Filtro Passa alta
+* Filtro Passa faixa
+* frequência de corte aproximadamente 2000 Hz
+* Precisa de buffer?\nsla botei
+* Freq de corte 500 Hz
+* Filtro Passa baixa
+* Saida do circuito:\nAudio em formato .wav
+* Saida do circuito:\nAudio em formato .wav
+* Saida do circuito:\nAudio em formato .wav
+.wave "output_test_baixo.wav" 16 44.1k V(exemplo1)
+.wave "output_test_faixa.wav" 16 44.1k V(exemplo2)
+.wave "output_test_alta.wav" 16 44.1k V(exemplo3)
+* Freq de corte 500 Hz
+* Filtro Passa baixa
 .lib LTC2.LIB
 .backanno
 .end
